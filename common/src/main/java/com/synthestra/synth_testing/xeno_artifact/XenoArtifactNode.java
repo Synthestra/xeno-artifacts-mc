@@ -1,67 +1,60 @@
 package com.synthestra.synth_testing.xeno_artifact;
 
-import com.synthestra.synth_testing.util.data_sets.n_node_tree.Node;
-import net.minecraft.util.RandomSource;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
-import java.util.ArrayList;
+public class XenoArtifactNode {
+    int id;
+    int depth;
+    HashSet<Integer> edges = new HashSet<>();
 
-public class XenoArtifactNode extends Node<XenoArtifactNodeData> {
-    XenoArtifactNodeData data;
-    ArrayList<Node<XenoArtifactNodeData>> children;
+    public XenoArtifactNode() {}
 
-    public final int nodeMaxEdges = 4;
-    public final RandomSource random = RandomSource.create();
-
-    public XenoArtifactNode(XenoArtifactNodeData data) {
-        super(data);
-        this.data = data;
-        this.children = new ArrayList<>();
+    public XenoArtifactNode(int id) {
+        this.id = id;
     }
 
-    public XenoArtifactNode() {
-
+    public XenoArtifactNode(int id, int depth) {
+        this.id = id;
+        this.depth = depth;
     }
 
-    public void generateData() {
-        RandomSource random = RandomSource.create();
-        this.data.nodeId = random.nextIntBetweenInclusive(100, 999);
+    public XenoArtifactNode(int id, int depth, HashSet<Integer> edges) {
+        this.id = id;
+        this.depth = depth;
+        this.edges = edges;
     }
 
-    // TODO heeeeeeeeeeelp i dont know what im doing
-    public int generateNode(int nodesToGenerate) {
-        int maxChildren = this.random.nextIntBetweenInclusive(1, this.nodeMaxEdges - 1);
-        this.generateData();
-        for (int i = 0; i < maxChildren; i++) {
-            XenoArtifactNode node = new XenoArtifactNode();
-            this.addChildren(node);
-        }
-
-
-        return nodesToGenerate - maxChildren;
+    public void setId(int id) {
+        this.id = id;
     }
 
-//    public static CompoundTag toNBT(XenoArtifactNodeData nodes) {
-//        ListTag nodesNBT = new ListTag();
-//        for (XenoArtifactNodeData node : nodes) {
-//            CompoundTag nodeNBT = new CompoundTag();
-//
-//            nodeNBT.putInt("NodeId", node.nodeId);
-//            nodeNBT.put("Children", node.children);
-//            nodesNBT.add(nodeNBT);
-//        }
-//        return nodesNBT;
-//    }
-//
-//    public static XenoArtifactNode fromNBT(ListTag nodesNBT) {
-//        ArrayList<XenoArtifactNodeData> nodes = new ArrayList<>();
-//        for (CompoundTag nodeNBT : nodesNBT.stream().map(CompoundTag.class::cast).toList()) {
-//            nodes.add(new XenoArtifactNodeData(
-//                    nodeNBT.get("Children"),
-//                    nodeNBT.getInt("NodeId"),
-//
-//                    XenoArtifactTriggers.valueOf(nodeNBT.getString("Trigger")).getTrigger()
-//            ));
-//        }
-//        return nodes;
-//    }
+    public int getId() {
+        return id;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setEdges(HashSet<Integer> edges) {
+        this.edges = edges;
+    }
+
+    public HashSet<Integer> getEdges() {
+        return edges;
+    }
+
+    public int[] getEdgesIntArray() {
+        return edges.stream().mapToInt(Number::intValue).toArray();
+    }
+
+    public HashSet<Integer> getEdgesFromIntArray(int[] edgesIntArray) {
+        return Arrays.stream(edgesIntArray).boxed().collect(Collectors.toCollection(HashSet::new));
+    }
 }

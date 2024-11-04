@@ -1,50 +1,84 @@
 package com.synthestra.synth_testing.xeno_artifact;
 
-import com.synthestra.synth_testing.util.data_sets.n_node_tree.Node;
+import net.minecraft.util.RandomSource;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
-public class XenoArtifactNodeTree extends XenoArtifactNode {
-    List<Integer> position;
+public class XenoArtifactNodeTree {
+    List<XenoArtifactNode> nodeTree = new ArrayList<>();
+    int currentNodeId;
 
+    public final RandomSource random = RandomSource.create();
     public final int nodeMin = 3;
     public final int nodeMax = 8;
+    public final int nodeMaxEdges = 4;
+    HashSet<Integer> usedNodeIds = new HashSet<>();
 
+    public XenoArtifactNodeTree() {}
 
-    public XenoArtifactNodeTree(XenoArtifactNodeData data) {
-        super(data);
+    public void setCurrentNodeId(int currentNodeId) {
+        this.currentNodeId = currentNodeId;
     }
 
-    public XenoArtifactNodeTree() {
-
+    public void setNodeTree(List<XenoArtifactNode> nodeTree) {
+        this.nodeTree = nodeTree;
     }
 
-    public List<Integer> getPosition() {
-        return position;
+    public void addNode(XenoArtifactNode node) {
+        this.nodeTree.add(node);
     }
 
-    public Node<XenoArtifactNodeData> getCurrentNode() {
-        Node<XenoArtifactNodeData> traversedNode = this;
-        for (int j : this.position) traversedNode = traversedNode.getChildren().get(j);
-        return traversedNode;
+    public int getCurrentNodeId() {
+        return currentNodeId;
     }
 
+    public List<XenoArtifactNode> getNodeTree() {
+        return nodeTree;
+    }
 
-    // TODO heeeeeeeeeeelp i dont know what im doing
-    public XenoArtifactNodeTree generate() {
-        XenoArtifactNodeTree tree = new XenoArtifactNodeTree();
+    public void generate() {
+        int nodesToCreate = this.random.nextIntBetweenInclusive(this.nodeMin, this.nodeMax);
 
-        int nodesToGenerate = this.random.nextIntBetweenInclusive(this.nodeMin, this.nodeMax);
+        List<XenoArtifactNode> uninitializedNodes = new ArrayList<>();
+        uninitializedNodes.add(new XenoArtifactNode(this.getValidNodeId()));
+        int createdNodes = 1;
 
-        this.generateData();
+        while(!uninitializedNodes.isEmpty()) {
+            XenoArtifactNode node = uninitializedNodes.get(0);
+            uninitializedNodes.remove(node);
 
-        while (nodesToGenerate >= 0) {
+            //trigger
+            //effect
 
-            nodesToGenerate = this.generateNode(nodesToGenerate);
+            int maxChildren = this.random.nextIntBetweenInclusive(1, this.nodeMaxEdges - 1);
 
+            for (int i = 0; i < maxChildren; i++) {
+                if (nodesToCreate <= createdNodes) break;
+
+                XenoArtifactNode child = new XenoArtifactNode(this.getValidNodeId(), node.depth + 1);
+                node.edges.add(child.id);
+                child.edges.add(node.id);
+
+                uninitializedNodes.add(child);
+                createdNodes++;
+            }
+            this.nodeTree.add(node);
         }
 
 
-        return tree;
+        this.usedNodeIds.clear();
+
+    }
+
+    private int getValidNodeId() {
+        int id = this.random.nextIntBetweenInclusive(100, 999);
+        while (this.usedNodeIds.contains(id)) {
+            id = this.random.nextIntBetweenInclusive(100, 999);
+        }
+        this.usedNodeIds.add(id);
+
+        return id;
     }
 }
