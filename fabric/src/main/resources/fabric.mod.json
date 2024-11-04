@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "synth_testing",
+  "version": "${version}",
+  "name": "Synth Testing",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/synth_testing/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.synthestra.synth_testing.fabric.SynthTestingFabric"
+    ],
+    "client": [
+      "com.synthestra.synth_testing.fabric.SynthTestingFabricClient"
+    ]
+  },
+  "mixins": [
+    "synth_testing.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
