@@ -20,6 +20,11 @@ public class XenoArtifactBlockEntity extends BlockEntity {
     public void generateTree() {
         this.nodeTree = new XenoArtifactNodeTree();
         this.nodeTree.generate();
+        this.setCurrentNodeId(this.nodeTree.getRootNode().getId());
+    }
+
+    public void setCurrentNodeId(int currentNodeId) {
+        this.currentNodeId = currentNodeId;
     }
 
     @Override

@@ -2,13 +2,10 @@ package com.synthestra.synth_testing.xeno_artifact;
 
 import net.minecraft.util.RandomSource;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class XenoArtifactNodeTree {
     List<XenoArtifactNode> nodeTree = new ArrayList<>();
-    int currentNodeId;
 
     public final RandomSource random = RandomSource.create();
     public final int nodeMin = 3;
@@ -18,20 +15,12 @@ public class XenoArtifactNodeTree {
 
     public XenoArtifactNodeTree() {}
 
-    public void setCurrentNodeId(int currentNodeId) {
-        this.currentNodeId = currentNodeId;
-    }
-
     public void setNodeTree(List<XenoArtifactNode> nodeTree) {
         this.nodeTree = nodeTree;
     }
 
     public void addNode(XenoArtifactNode node) {
         this.nodeTree.add(node);
-    }
-
-    public int getCurrentNodeId() {
-        return currentNodeId;
     }
 
     public List<XenoArtifactNode> getNodeTree() {
@@ -41,13 +30,12 @@ public class XenoArtifactNodeTree {
     public void generate() {
         int nodesToCreate = this.random.nextIntBetweenInclusive(this.nodeMin, this.nodeMax);
 
-        List<XenoArtifactNode> uninitializedNodes = new ArrayList<>();
+        Queue<XenoArtifactNode> uninitializedNodes = new LinkedList<>();
         uninitializedNodes.add(new XenoArtifactNode(this.getValidNodeId()));
         int createdNodes = 1;
 
         while(!uninitializedNodes.isEmpty()) {
-            XenoArtifactNode node = uninitializedNodes.get(0);
-            uninitializedNodes.remove(node);
+            XenoArtifactNode node = uninitializedNodes.remove();
 
             //trigger
             //effect
@@ -69,7 +57,6 @@ public class XenoArtifactNodeTree {
 
 
         this.usedNodeIds.clear();
-
     }
 
     private int getValidNodeId() {
@@ -80,5 +67,9 @@ public class XenoArtifactNodeTree {
         this.usedNodeIds.add(id);
 
         return id;
+    }
+
+    public XenoArtifactNode getRootNode() {
+        return this.getNodeTree().stream().filter(e -> e.getDepth() == 0).findFirst().orElseThrow();
     }
 }
