@@ -3,8 +3,14 @@ package com.synthestra.synth_testing.block;
 import com.mojang.serialization.MapCodec;
 import com.synthestra.synth_testing.block.entity.XenoArtifactBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -12,8 +18,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class XenoArtifactBlock extends BaseEntityBlock {
@@ -34,11 +42,9 @@ public class XenoArtifactBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof XenoArtifactBlockEntity xenoArtifactBE) {
-            xenoArtifactBE.generateTree();
-        }
+        if (blockEntity instanceof XenoArtifactBlockEntity xenoArtifactBE) xenoArtifactBE.generateTree();
     }
 
     @Override
@@ -47,7 +53,7 @@ public class XenoArtifactBlock extends BaseEntityBlock {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState state) {
+    public @NotNull RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 }

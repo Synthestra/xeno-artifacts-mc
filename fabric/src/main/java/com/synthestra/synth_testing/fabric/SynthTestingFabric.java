@@ -1,5 +1,6 @@
 package com.synthestra.synth_testing.fabric;
 
+import com.synthestra.synth_testing.registry.fabric.SynTabsImpl;
 import net.fabricmc.api.ModInitializer;
 
 import com.synthestra.synth_testing.SynthTesting;
@@ -7,11 +8,7 @@ import com.synthestra.synth_testing.SynthTesting;
 public final class SynthTestingFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        // This code runs as soon as Minecraft is in a mod-load-ready state.
-        // However, some things (like resources) may still be uninitialized.
-        // Proceed with mild caution.
-
-        // Run our common setup.
         SynthTesting.init();
+        SynTabsImpl.register();
     }
 }

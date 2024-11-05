@@ -27,6 +27,10 @@ public class XenoArtifactNodeTree {
         return nodeTree;
     }
 
+    public void nextNode() {
+
+    }
+
     public void generate() {
         int nodesToCreate = this.random.nextIntBetweenInclusive(this.nodeMin, this.nodeMax);
 

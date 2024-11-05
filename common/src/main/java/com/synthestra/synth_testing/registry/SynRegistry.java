@@ -27,6 +27,10 @@ public class SynRegistry {
         throw new AssertionError();
     }
 
+    public static <T extends Item> Supplier<T> registerItem(String name, Supplier<T> item) {
+        return registerItem(name, item, "tab");
+    }
+
     @ExpectPlatform
     public static <T extends Item> Supplier<T> registerItem(String name, Supplier<T> item, String tab_id) {
         throw new AssertionError();

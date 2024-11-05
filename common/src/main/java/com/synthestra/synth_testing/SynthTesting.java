@@ -1,7 +1,6 @@
 package com.synthestra.synth_testing;
 
-import com.synthestra.synth_testing.registry.SynBlockEntityTypes;
-import com.synthestra.synth_testing.registry.SynBlocks;
+import com.synthestra.synth_testing.registry.*;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,13 +11,13 @@ public final class SynthTesting {
 
     public static void init() {
         SynBlocks.init();
-        //SynItems.init();
-        //SynSoundEvents.init();
+        SynItems.init();
+        SynSoundEvents.init();
         //SynEntityTypes.init();
         SynBlockEntityTypes.init();
 
-        //SynItemTags.init();
-        //SynBlockTags.init();
+        SynItemTags.init();
+        SynBlockTags.init();
     }
 
     public static ResourceLocation res(String name) {
