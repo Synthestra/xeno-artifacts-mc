@@ -27,8 +27,18 @@ public class XenoArtifactNodeTree {
         return nodeTree;
     }
 
-    public void nextNode() {
+    public XenoArtifactNode getRootNode() {
+        return this.nodeTree.stream().filter(e -> e.getDepth() == 0).findFirst().orElseThrow();
+    }
 
+    public XenoArtifactNode getNodeFromId(int id) {
+        return this.nodeTree.stream().filter(e -> e.getId() == id).findFirst().orElseThrow();
+    }
+
+    public List<XenoArtifactNode> getEdgesOf(XenoArtifactNode node) {
+        List<XenoArtifactNode> edges = new ArrayList<>();
+        node.edges.forEach(e -> edges.add(this.getNodeFromId(e)));
+        return edges;
     }
 
     public void generate() {
@@ -41,7 +51,7 @@ public class XenoArtifactNodeTree {
         while(!uninitializedNodes.isEmpty()) {
             XenoArtifactNode node = uninitializedNodes.remove();
 
-            //trigger
+            node.trigger = XenoArtifactTrigger.pick(random);
             //effect
 
             int maxChildren = this.random.nextIntBetweenInclusive(1, this.nodeMaxEdges - 1);
@@ -71,9 +81,5 @@ public class XenoArtifactNodeTree {
         this.usedNodeIds.add(id);
 
         return id;
-    }
-
-    public XenoArtifactNode getRootNode() {
-        return this.getNodeTree().stream().filter(e -> e.getDepth() == 0).findFirst().orElseThrow();
     }
 }

@@ -1,8 +1,7 @@
 package com.synthestra.synth_testing.xeno_artifact.triggers;
 
-public class EntityDieTrigger extends Trigger {
-
+public class Trigger {
     public String customMessage() {
-        return "An Entity needs to die";
-    }
+        return "";
+    };
 }

@@ -8,6 +8,8 @@ public class XenoArtifactNode {
     int id;
     int depth;
     HashSet<Integer> edges = new HashSet<>();
+    XenoArtifactTrigger trigger;
+    XenoArtifactEffect effect;
 
     public XenoArtifactNode() {}
 
@@ -24,6 +26,21 @@ public class XenoArtifactNode {
         this.id = id;
         this.depth = depth;
         this.edges = edges;
+    }
+
+    public XenoArtifactNode(int id, int depth, HashSet<Integer> edges, XenoArtifactTrigger trigger) {
+        this.id = id;
+        this.depth = depth;
+        this.edges = edges;
+        this.trigger = trigger;
+    }
+
+    public XenoArtifactNode(int id, int depth, HashSet<Integer> edges, XenoArtifactTrigger trigger, XenoArtifactEffect effect) {
+        this.id = id;
+        this.depth = depth;
+        this.edges = edges;
+        this.trigger = trigger;
+        this.effect = effect;
     }
 
     public void setId(int id) {
@@ -56,5 +73,13 @@ public class XenoArtifactNode {
 
     public HashSet<Integer> getEdgesFromIntArray(int[] edgesIntArray) {
         return Arrays.stream(edgesIntArray).boxed().collect(Collectors.toCollection(HashSet::new));
+    }
+
+    public void setTrigger(XenoArtifactTrigger trigger) {
+        this.trigger = trigger;
+    }
+
+    public XenoArtifactTrigger getTrigger() {
+        return trigger;
     }
 }

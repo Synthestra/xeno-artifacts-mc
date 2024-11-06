@@ -1,0 +1,15 @@
+{
+	"block.xeno_artifact.activate": {
+		"category": "block",
+		"sounds": [
+			"synth_testing:xeno_artifact/artifact1",
+			"synth_testing:xeno_artifact/artifact2",
+			"synth_testing:xeno_artifact/artifact3",
+			"synth_testing:xeno_artifact/artifact4",
+			"synth_testing:xeno_artifact/artifact5",
+			"synth_testing:xeno_artifact/artifact6",
+			"synth_testing:xeno_artifact/artifact7"
+		],
+		"subtitle": "subtitles.block.synth_testing.xeno_artifact.activate"
+	}
+}

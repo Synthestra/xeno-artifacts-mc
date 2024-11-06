@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvent;
 import java.util.function.Supplier;
 
 public class SynSoundEvents {
-    //public static final Supplier<SoundEvent> SERVICE_BELL = register("block.service_bell.use");
+    public static final Supplier<SoundEvent> ARTIFACT_ACTIVATE = register("block.xeno_artifact.activate");
 
     public static Supplier<SoundEvent> register(String name) {
         return SynRegistry.registerSoundEvent(name, () -> SoundEvent.createVariableRangeEvent(SynthTesting.res(name)));

@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "synth_testing:item/xeno_node_bias_up"
+	}
+}
