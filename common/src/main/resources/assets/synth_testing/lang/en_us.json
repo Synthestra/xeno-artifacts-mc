@@ -1,0 +1,16 @@
+{
+	"note.xeno_artifacts.node_id": "Node ID: %s",
+	"note.xeno_artifacts.bias_direction": "Bias Direction: %s",
+	"note.xeno_artifacts.edges": "Edges: %s",
+	"note.xeno_artifacts.depth": "Depth: %s",
+	"note.xeno_artifacts.trigger": "Stimulus: %s",
+	"note.xeno_artifacts.reaction": "Reaction: %s",
+	
+	"trigger.xeno_artifacts.entity_death": "Life Essence",
+	"trigger.xeno_artifacts.electricity": "Electricity",
+	"trigger.xeno_artifacts.positive_potion": "Positive Potion",
+	
+	"reaction.xeno_artifacts.spawn_item": "Spawn Item",
+	"reaction.xeno_artifacts.spawn_entity": "Spawn Entity",
+	"reaction.xeno_artifacts.harden_to_deepslate": "Material Hardening"
+}

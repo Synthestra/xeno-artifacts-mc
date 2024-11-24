@@ -19,7 +19,6 @@ public class XenoNodeBiasItem extends Item {
 
     @Override
     public @NotNull InteractionResult useOn(UseOnContext context) {
-
         Level level = context.getLevel();
         BlockEntity blockEntity = level.getBlockEntity(context.getClickedPos());
         if (blockEntity instanceof XenoArtifactBlockEntity xenoArtifactBE) {

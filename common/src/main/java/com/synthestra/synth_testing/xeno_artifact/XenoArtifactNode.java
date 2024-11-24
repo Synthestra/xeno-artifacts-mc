@@ -9,7 +9,7 @@ public class XenoArtifactNode {
     int depth;
     HashSet<Integer> edges = new HashSet<>();
     XenoArtifactTrigger trigger;
-    XenoArtifactEffect effect;
+    XenoArtifactReaction reaction;
 
     public XenoArtifactNode() {}
 
@@ -20,27 +20,6 @@ public class XenoArtifactNode {
     public XenoArtifactNode(int id, int depth) {
         this.id = id;
         this.depth = depth;
-    }
-
-    public XenoArtifactNode(int id, int depth, HashSet<Integer> edges) {
-        this.id = id;
-        this.depth = depth;
-        this.edges = edges;
-    }
-
-    public XenoArtifactNode(int id, int depth, HashSet<Integer> edges, XenoArtifactTrigger trigger) {
-        this.id = id;
-        this.depth = depth;
-        this.edges = edges;
-        this.trigger = trigger;
-    }
-
-    public XenoArtifactNode(int id, int depth, HashSet<Integer> edges, XenoArtifactTrigger trigger, XenoArtifactEffect effect) {
-        this.id = id;
-        this.depth = depth;
-        this.edges = edges;
-        this.trigger = trigger;
-        this.effect = effect;
     }
 
     public void setId(int id) {
@@ -67,6 +46,10 @@ public class XenoArtifactNode {
         return edges;
     }
 
+    public void addEdges(int edge) {
+        edges.add(edge);
+    }
+
     public int[] getEdgesIntArray() {
         return edges.stream().mapToInt(Number::intValue).toArray();
     }
@@ -81,5 +64,13 @@ public class XenoArtifactNode {
 
     public XenoArtifactTrigger getTrigger() {
         return trigger;
+    }
+
+    public void setReaction(XenoArtifactReaction reaction) {
+        this.reaction = reaction;
+    }
+
+    public XenoArtifactReaction getReaction() {
+        return reaction;
     }
 }

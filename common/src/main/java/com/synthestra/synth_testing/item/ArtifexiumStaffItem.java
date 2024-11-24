@@ -19,7 +19,7 @@ public class ArtifexiumStaffItem extends Item {
         BlockEntity blockEntity = level.getBlockEntity(context.getClickedPos());
         if (blockEntity instanceof XenoArtifactBlockEntity xenoArtifactBE) {
             if (level.isClientSide) return InteractionResult.SUCCESS;
-            xenoArtifactBE.getNewNode();
+            xenoArtifactBE.activateNode(level, context.getClickedPos(), xenoArtifactBE.getCurrentNode());
             return InteractionResult.SUCCESS;
         }
         return super.useOn(context);
