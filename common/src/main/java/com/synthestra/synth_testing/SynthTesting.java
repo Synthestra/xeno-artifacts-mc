@@ -2,6 +2,7 @@ package com.synthestra.synth_testing;
 
 import com.synthestra.synth_testing.registry.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BrushItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

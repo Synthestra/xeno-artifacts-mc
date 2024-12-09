@@ -11,5 +11,15 @@
 			"synth_testing:xeno_artifact/artifact7"
 		],
 		"subtitle": "subtitles.block.synth_testing.xeno_artifact.activate"
+	},
+	"item.node_scanner.scan": {
+		"category": "block",
+		"sounds": [
+			{
+				"name": "synth_testing:xeno_artifact/scan",
+				"volume": 0.15
+			}
+		],
+		"subtitle": "subtitles.item.synth_testing.node_scanner.scan"
 	}
 }

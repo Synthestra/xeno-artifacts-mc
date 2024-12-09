@@ -1,5 +1,6 @@
 package com.synthestra.synth_testing.xeno_artifact.triggers;
 
+import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -19,5 +20,4 @@ public class ElectricityTrigger extends Trigger implements ListenerTrigger {
     public int listenRadius() {
         return 8;
     }
-    //testing repo name change
 }

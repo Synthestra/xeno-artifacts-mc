@@ -2,20 +2,28 @@ package com.synthestra.synth_testing.block.entity;
 
 import com.synthestra.synth_testing.block.XenoArtifactBlock;
 import com.synthestra.synth_testing.registry.SynBlockEntityTypes;
+import com.synthestra.synth_testing.registry.SynItems;
 import com.synthestra.synth_testing.registry.SynSoundEvents;
 import com.synthestra.synth_testing.xeno_artifact.XenoArtifactNode;
 import com.synthestra.synth_testing.xeno_artifact.XenoArtifactReaction;
 import com.synthestra.synth_testing.xeno_artifact.XenoArtifactTrigger;
 import com.synthestra.synth_testing.xeno_artifact.triggers.ListenerTrigger;
 import com.synthestra.synth_testing.xeno_artifact.triggers.Trigger;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -244,6 +252,29 @@ public class XenoArtifactBlockEntity extends BlockEntity implements GameEventLis
         while (this.usedNodeIds.contains(id)) id = this.random.nextIntBetweenInclusive(100, 999);
         this.usedNodeIds.add(id);
         return id;
+    }
+
+    public void finishScan(Player player) {
+        XenoArtifactNode node = this.getCurrentNode();
+        int nodeId = node.getId();
+        String biasDirection = this.getDirectionBias() == Direction.DOWN ? "↓" : "↑";
+        int edges = this.getEdgesOf(node).size();
+        int depth = this.getDepth();
+        String trigger = "trigger.xeno_artifacts." + node.getTrigger().toString();
+        String reaction = "reaction.xeno_artifacts." + node.getReaction().toString();
+
+        Style noItalic = Style.EMPTY.withColor(ChatFormatting.WHITE).withItalic(false);
+        List<Component> lore = new ArrayList<>();
+        lore.add(Component.translatable("note.xeno_artifacts.node_id", nodeId).setStyle(noItalic));
+        lore.add(Component.translatable("note.xeno_artifacts.bias_direction", biasDirection).setStyle(noItalic));
+        lore.add(Component.translatable("note.xeno_artifacts.depth", depth).setStyle(noItalic));
+        lore.add(Component.translatable("note.xeno_artifacts.edges", edges).setStyle(noItalic));
+        lore.add(Component.translatable("note.xeno_artifacts.trigger", Component.translatable(trigger)).setStyle(noItalic));
+        lore.add(Component.translatable("note.xeno_artifacts.reaction", Component.translatable(reaction)).setStyle(noItalic));
+
+        ItemStack scanner = new ItemStack(SynItems.NODE_SCANNER.get());
+        scanner.set(DataComponents.LORE, new ItemLore(lore));
+        player.setItemInHand(player.getUsedItemHand(), scanner);
     }
 
     public final String NBT_NAME_TREE = "tree";
