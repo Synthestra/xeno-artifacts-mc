@@ -6,11 +6,13 @@
 	"note.xeno_artifacts.trigger": "Stimulus: %s",
 	"note.xeno_artifacts.reaction": "Reaction: %s",
 	
-	"trigger.xeno_artifacts.entity_death": "Life Essence",
+	"trigger.xeno_artifacts.entity_die": "Life Essence",
 	"trigger.xeno_artifacts.electricity": "Electricity",
-	"trigger.xeno_artifacts.positive_potion": "Positive Potion",
+	"trigger.xeno_artifacts.beneficial_potion": "Applied Effect",
+	"trigger.xeno_artifacts.harmful_potion": "Applied Effect",
 	
-	"reaction.xeno_artifacts.spawn_item": "Spawn Item",
-	"reaction.xeno_artifacts.spawn_entity": "Spawn Entity",
-	"reaction.xeno_artifacts.harden_to_deepslate": "Material Hardening"
+	"reaction.xeno_artifacts.spawn_item": "Matter Creation",
+	"reaction.xeno_artifacts.spawn_entity": "Matter Creation",
+	"reaction.xeno_artifacts.harden_to_deepslate": "Material Hardening",
+	"reaction.xeno_artifacts.random_teleport": "Metaphysical Displacement"
 }

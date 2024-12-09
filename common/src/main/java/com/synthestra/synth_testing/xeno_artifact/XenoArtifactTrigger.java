@@ -2,17 +2,19 @@ package com.synthestra.synth_testing.xeno_artifact;
 
 import com.synthestra.synth_testing.xeno_artifact.triggers.ElectricityTrigger;
 import com.synthestra.synth_testing.xeno_artifact.triggers.EntityDieTrigger;
-import com.synthestra.synth_testing.xeno_artifact.triggers.PositivePotionTrigger;
+import com.synthestra.synth_testing.xeno_artifact.triggers.PotionTrigger;
 import com.synthestra.synth_testing.xeno_artifact.triggers.Trigger;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.effect.MobEffectCategory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public enum XenoArtifactTrigger implements StringRepresentable {
     ENTITY_DIE("entity_die", new EntityDieTrigger()),
     ELECTRICITY("electricity", new ElectricityTrigger()),
-    POSITIVE_POTION("positive_potion", new PositivePotionTrigger());
+    BENEFICIAL_POTION("beneficial_potion", new PotionTrigger(MobEffectCategory.BENEFICIAL)),
+    HARMFUL_POTION("harmful_potion", new PotionTrigger(MobEffectCategory.HARMFUL));
 
     private static final XenoArtifactTrigger[] VALUES = values();
     public static final StringRepresentable.EnumCodec<XenoArtifactTrigger> CODEC = StringRepresentable.fromEnum(XenoArtifactTrigger::values);

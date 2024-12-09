@@ -102,7 +102,7 @@ public class XenoArtifactBlockEntity extends BlockEntity implements GameEventLis
         return this.xenoListener;
     }
 
-    public static class XenoListener implements GameEventListener {
+    public class XenoListener implements GameEventListener {
         private final BlockState blockState;
         private final PositionSource positionSource;
 
@@ -116,7 +116,11 @@ public class XenoArtifactBlockEntity extends BlockEntity implements GameEventLis
         }
 
         public int getListenerRadius() {
-            return 4;
+            XenoArtifactBlockEntity xenoArtifactBE = XenoArtifactBlockEntity.this;
+            XenoArtifactNode node = xenoArtifactBE.getCurrentNode();
+            Trigger trigger = node.getTriggerValue();
+            if (!(trigger instanceof ListenerTrigger listenerTrigger)) return 0;
+            return listenerTrigger.listenRadius();
         }
 
         public GameEventListener.DeliveryMode getDeliveryMode() {
@@ -124,26 +128,31 @@ public class XenoArtifactBlockEntity extends BlockEntity implements GameEventLis
         }
 
         public boolean handleGameEvent(ServerLevel level, Holder<GameEvent> gameEvent, GameEvent.Context context, Vec3 pos) {
-            Optional<Vec3> vec3 = this.positionSource.getPosition(level);
-            if (vec3.isEmpty()) return false;
-            BlockPos xenoPos = BlockPos.containing(vec3.get());
 
-            BlockEntity blockEntity = level.getBlockEntity(xenoPos);
-            if (blockEntity instanceof XenoArtifactBlockEntity xenoArtifactBE) {
-                XenoArtifactNode node = xenoArtifactBE.getCurrentNode();
-                Trigger trigger = node.getTrigger().getTrigger();
-                if (!(trigger instanceof ListenerTrigger listenerTrigger)) return false;
-                if (listenerTrigger.testListener(level, gameEvent, context, pos)) {
-                    xenoArtifactBE.activateNode(level, xenoPos, node);
-                    return true;
-                }
+            //Optional<Vec3> vec3 = this.positionSource.getPosition(level);
+            //if (vec3.isEmpty()) return false;
+            //BlockPos xenoPos = BlockPos.containing(vec3.get());
+
+            XenoArtifactBlockEntity xenoArtifactBE = XenoArtifactBlockEntity.this;
+            if (!xenoArtifactBE.canActivate()) return false;
+
+            XenoArtifactNode node = xenoArtifactBE.getCurrentNode();
+            Trigger trigger = node.getTriggerValue();
+            if (!(trigger instanceof ListenerTrigger listenerTrigger)) return false;
+            if (listenerTrigger.testListener(level, gameEvent, context, pos)) {
+                xenoArtifactBE.activateNode(level, xenoArtifactBE.worldPosition, node);
+                return true;
             }
             return false;
         }
     }
 
+    public boolean canActivate() {
+        return !this.isActivated();
+    }
+
     public void activateNode(Level level, BlockPos pos, XenoArtifactNode node) {
-        node.getReaction().getReaction().effect(level, pos);
+        node.getReactionValue().effect(level, pos);
 
         level.setBlock(pos, this.getBlockState().setValue(XenoArtifactBlock.ACTIVATED, true), 3);
         this.activatedCooldown = 100;
@@ -237,50 +246,60 @@ public class XenoArtifactBlockEntity extends BlockEntity implements GameEventLis
         return id;
     }
 
+    public final String NBT_NAME_TREE = "tree";
+    public final String NBT_NAME_COOLDOWN = "cooldown";
+    public final String NBT_NAME_DIRECTION = "dir";
+    public final String NBT_NAME_ID = "id";
+    public final String NBT_NAME_DEPTH = "d";
+    public final String NBT_NAME_EDGES = "e";
+    public final String NBT_NAME_TRIGGER = "t";
+    public final String NBT_NAME_REACTION = "r";
+    public final String NBT_NAME_CURRENT_ID = "current_id";
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        this.currentNode = this.getNodeFromId(tag.getInt("current_id"));
-        this.directionBias = Direction.byName(tag.getString("dir"));
-        this.activatedCooldown = tag.getInt("cooldown");
 
-        ListTag nodeTreeNBT = tag.getList("tree", Tag.TAG_COMPOUND);
+        this.directionBias = Direction.byName(tag.getString(NBT_NAME_DIRECTION));
+        this.activatedCooldown = tag.getInt(NBT_NAME_COOLDOWN);
+
+        ListTag nodeTreeNBT = tag.getList(NBT_NAME_TREE, Tag.TAG_COMPOUND);
         this.nodeTree = new ArrayList<>();
         for (int i = 0; i < nodeTreeNBT.size(); i++) {
             CompoundTag nodeNBT = nodeTreeNBT.getCompound(i);
             XenoArtifactNode node = new XenoArtifactNode();
 
-            node.setId(nodeNBT.getInt("id"));
-            node.setDepth(nodeNBT.getInt("d"));
-            node.setEdges(node.getEdgesFromIntArray(nodeNBT.getIntArray("e")));
-            node.setTrigger(XenoArtifactTrigger.byName(nodeNBT.getString("t")));
-            node.setReaction(XenoArtifactReaction.byName(nodeNBT.getString("r")));
+            node.setId(nodeNBT.getInt(NBT_NAME_ID));
+            node.setDepth(nodeNBT.getInt(NBT_NAME_DEPTH));
+            node.setEdges(node.getEdgesFromIntArray(nodeNBT.getIntArray(NBT_NAME_EDGES)));
+            node.setTrigger(XenoArtifactTrigger.byName(nodeNBT.getString(NBT_NAME_TRIGGER)));
+            node.setReaction(XenoArtifactReaction.byName(nodeNBT.getString(NBT_NAME_REACTION)));
 
             this.addNode(node);
         }
+        this.currentNode = this.getNodeFromId(tag.getInt(NBT_NAME_CURRENT_ID));
 
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("current_id", this.currentNode.getId());
-        tag.putString("dir", this.directionBias.getName());
-        tag.putInt("cooldown", this.activatedCooldown);
+        tag.putInt(NBT_NAME_CURRENT_ID, this.currentNode.getId());
+        tag.putString(NBT_NAME_DIRECTION, this.directionBias.getName());
+        tag.putInt(NBT_NAME_COOLDOWN, this.activatedCooldown);
 
         ListTag nodeTreeNBT = new ListTag();
         for (XenoArtifactNode node : this.getNodeTree()) {
             CompoundTag nodeNBT = new CompoundTag();
 
-            nodeNBT.putInt("id", node.getId());
-            nodeNBT.putInt("d", node.getDepth());
-            nodeNBT.putIntArray("e", node.getEdgesIntArray());
-            nodeNBT.putString("t", node.getTrigger().getSerializedName());
-            nodeNBT.putString("r", node.getReaction().getSerializedName());
+            nodeNBT.putInt(NBT_NAME_ID, node.getId());
+            nodeNBT.putInt(NBT_NAME_DEPTH, node.getDepth());
+            nodeNBT.putIntArray(NBT_NAME_EDGES, node.getEdgesIntArray());
+            nodeNBT.putString(NBT_NAME_TRIGGER, node.getTrigger().getSerializedName());
+            nodeNBT.putString(NBT_NAME_REACTION, node.getReaction().getSerializedName());
 
             nodeTreeNBT.add(nodeNBT);
         }
-        tag.put("tree", nodeTreeNBT);
+        tag.put(NBT_NAME_TREE, nodeTreeNBT);
     }
 }

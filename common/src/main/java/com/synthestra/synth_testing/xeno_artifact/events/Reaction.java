@@ -15,8 +15,4 @@ public class Reaction {
     }
 
     public void effect(Level level, BlockPos pos) {}
-
-    public String genericName() {
-        return null;
-    }
 }

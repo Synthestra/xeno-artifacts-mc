@@ -1,7 +1,17 @@
 {
-    "variants": {
-        "": {
-            "model": "synth_testing:block/xeno_artifact"
-        }
-    }
+	"multipart": [
+		{
+			"apply": {
+				"model": "synth_testing:block/xeno_artifact"
+			}
+		},
+		{
+			"apply": {
+				"model": "synth_testing:block/xeno_artifact_activated"
+			},
+			"when": {
+				"activated": "true"
+			}
+		}
+	]
 }

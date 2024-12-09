@@ -1,19 +1,23 @@
 package com.synthestra.synth_testing.xeno_artifact;
 
 import com.synthestra.synth_testing.registry.SynConfiguredFeatures;
-import com.synthestra.synth_testing.xeno_artifact.events.HardenReaction;
-import com.synthestra.synth_testing.xeno_artifact.events.Reaction;
-import com.synthestra.synth_testing.xeno_artifact.events.SpawnEntityReaction;
-import com.synthestra.synth_testing.xeno_artifact.events.SpawnItemReaction;
+import com.synthestra.synth_testing.registry.SynLootTables;
+import com.synthestra.synth_testing.xeno_artifact.events.*;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public enum XenoArtifactReaction implements StringRepresentable {
-    SPAWN_ITEM("spawn_item", new SpawnItemReaction()),
+    SPAWN_ITEM("spawn_item", new SpawnItemReaction(new ItemStack(Items.DIAMOND))),
     SPAWN_ENTITY("spawn_entity", new SpawnEntityReaction()),
-    HARDEN_TO_DEEPSLATE("harden_to_deepslate", new HardenReaction(SynConfiguredFeatures.HARDEN_TO_DEEPSLATE));
+    HARDEN_TO_DEEPSLATE("harden_to_deepslate", new HardenReaction(SynConfiguredFeatures.HARDEN_TO_DEEPSLATE)),
+    RANDOM_TELEPORT("random_teleport", new RandomTeleportReaction()),
+    SPAWN_LOOT("spawn_loot", new SpawnLootReaction(SynLootTables.REWARD_1)),
+    WEAK_EXPLOSION("weak_explosion", new WeakExplosionReaction());
+
 
     private static final XenoArtifactReaction[] VALUES = values();
     public static final StringRepresentable.EnumCodec<XenoArtifactReaction> CODEC = StringRepresentable.fromEnum(XenoArtifactReaction::values);

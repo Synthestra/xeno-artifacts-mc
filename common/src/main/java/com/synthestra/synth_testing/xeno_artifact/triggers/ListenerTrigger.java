@@ -7,4 +7,6 @@ import net.minecraft.world.phys.Vec3;
 
 public interface ListenerTrigger {
     boolean testListener(ServerLevel level, Holder<GameEvent> gameEvent, GameEvent.Context context, Vec3 pos);
+
+    int listenRadius();
 }

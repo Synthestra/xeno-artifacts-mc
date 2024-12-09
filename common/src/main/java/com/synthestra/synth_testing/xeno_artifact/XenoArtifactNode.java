@@ -1,5 +1,8 @@
 package com.synthestra.synth_testing.xeno_artifact;
 
+import com.synthestra.synth_testing.xeno_artifact.events.Reaction;
+import com.synthestra.synth_testing.xeno_artifact.triggers.Trigger;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -66,11 +69,19 @@ public class XenoArtifactNode {
         return trigger;
     }
 
+    public Trigger getTriggerValue() {
+        return trigger.getTrigger();
+    }
+
     public void setReaction(XenoArtifactReaction reaction) {
         this.reaction = reaction;
     }
 
     public XenoArtifactReaction getReaction() {
         return reaction;
+    }
+
+    public Reaction getReactionValue() {
+        return reaction.getReaction();
     }
 }

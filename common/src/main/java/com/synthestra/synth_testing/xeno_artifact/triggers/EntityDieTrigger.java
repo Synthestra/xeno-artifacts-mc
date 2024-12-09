@@ -25,4 +25,9 @@ public class EntityDieTrigger extends Trigger implements ListenerTrigger {
         }
         return false;
     }
+
+    @Override
+    public int listenRadius() {
+        return 8;
+    }
 }

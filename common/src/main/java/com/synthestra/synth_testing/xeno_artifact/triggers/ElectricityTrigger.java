@@ -14,4 +14,9 @@ public class ElectricityTrigger extends Trigger implements ListenerTrigger {
     public boolean testListener(ServerLevel level, Holder<GameEvent> gameEvent, GameEvent.Context context, Vec3 pos) {
         return gameEvent.is(GameEvent.LIGHTNING_STRIKE);
     }
+
+    @Override
+    public int listenRadius() {
+        return 8;
+    }
 }

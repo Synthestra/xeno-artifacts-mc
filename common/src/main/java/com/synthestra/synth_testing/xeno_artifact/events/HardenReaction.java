@@ -20,10 +20,6 @@ public class HardenReaction extends Reaction {
         if (!(level instanceof ServerLevel serverLevel)) return;
         serverLevel.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap(
                 (registry) -> registry.getHolder(this.hardenTo))
-                .ifPresent((reference) -> reference.value().place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos.below()));
-    }
-
-    public String genericName() {
-        return "material_hardening";
+                .ifPresent((reference) -> reference.value().place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos));
     }
 }
