@@ -1,0 +1,25 @@
+{
+	"block.xeno_artifact.activate": {
+		"category": "block",
+		"sounds": [
+			"xeno_artifacts:xeno_artifact/artifact1",
+			"xeno_artifacts:xeno_artifact/artifact2",
+			"xeno_artifacts:xeno_artifact/artifact3",
+			"xeno_artifacts:xeno_artifact/artifact4",
+			"xeno_artifacts:xeno_artifact/artifact5",
+			"xeno_artifacts:xeno_artifact/artifact6",
+			"xeno_artifacts:xeno_artifact/artifact7"
+		],
+		"subtitle": "subtitles.block.xeno_artifacts.xeno_artifact.activate"
+	},
+	"item.node_scanner.scan": {
+		"category": "block",
+		"sounds": [
+			{
+				"name": "xeno_artifacts:xeno_artifact/scan",
+				"volume": 0.15
+			}
+		],
+		"subtitle": "subtitles.item.xeno_artifacts.node_scanner.scan"
+	}
+}

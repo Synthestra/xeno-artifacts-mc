@@ -1,0 +1,6 @@
+{
+	"model": {
+		"type": "minecraft:model",
+		"model": "xeno_artifacts:item/node_scanner_print_out"
+	}
+}

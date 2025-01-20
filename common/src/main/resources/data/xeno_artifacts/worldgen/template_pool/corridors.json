@@ -1,0 +1,42 @@
+{
+	"name": "xeno_artifacts:corridors",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 30,
+			"element": {
+				"location": "xeno_artifacts:corridor",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		},
+		{
+			"weight": 50,
+			"element": {
+				"location": "xeno_artifacts:corridor_cap",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		},
+		{
+			"weight": 20,
+			"element": {
+				"location": "xeno_artifacts:corridor_staircase",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		},
+		{
+			"weight": 100,
+			"element": {
+				"location": "xeno_artifacts:water_gangway",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		}
+	]
+}

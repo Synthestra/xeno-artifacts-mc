@@ -1,0 +1,24 @@
+{
+	"name": "xeno_artifacts:artifact_room_addons",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 50,
+			"element": {
+				"location": "xeno_artifacts:artifact_room_addon_1",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		},
+		{
+			"weight": 50,
+			"element": {
+				"location": "xeno_artifacts:artifact_room_addon_2",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		}
+	]
+}

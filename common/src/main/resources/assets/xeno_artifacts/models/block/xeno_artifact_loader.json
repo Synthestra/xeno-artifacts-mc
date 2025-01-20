@@ -1,0 +1,4 @@
+{
+	"loader": "xeno_artifacts:xeno_artifact",
+	"overlay": "minecraft:block/air"
+}

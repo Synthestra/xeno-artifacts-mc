@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:block",
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "xeno_artifacts:xeno_artifact"
+				}
+			],
+			"functions": [
+				{
+					"function": "minecraft:copy_components",
+					"include": [
+						"xeno_artifacts:xeno_artifact"
+					],
+					"source": "block_entity"
+				}
+			]
+		}
+	]
+}

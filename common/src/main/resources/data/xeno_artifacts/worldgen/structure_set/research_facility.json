@@ -1,0 +1,14 @@
+{
+	"placement": {
+		"type": "minecraft:random_spread",
+		"salt": 1352341267,
+		"separation": 8,
+		"spacing": 34
+	},
+	"structures": [
+		{
+			"structure": "xeno_artifacts:research_facility",
+			"weight": 10
+		}
+	]
+}

@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.synthestra.xeno_artifacts.mixins.fabric",
+  "compatibilityLevel": "JAVA_17",
+  "_client": [
+    "BlockModelAccessor",
+    "BlockModelDeserializerMixin",
+    "BlockModelMixin",
+    "ClientPacketListenerMixin"
+  ],
+  "_mixins": [
+    "SelfCustomBakedModel",
+    "SelfIExtraModelDataProvider"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

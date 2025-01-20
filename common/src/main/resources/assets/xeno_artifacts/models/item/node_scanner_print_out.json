@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "xeno_artifacts:item/node_scanner_print_out"
+	}
+}

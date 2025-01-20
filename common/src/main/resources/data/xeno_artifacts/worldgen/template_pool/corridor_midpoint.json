@@ -1,0 +1,24 @@
+{
+	"name": "xeno_artifacts:corridor_midpoint",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 70,
+			"element": {
+				"location": "xeno_artifacts:artifact_room_1",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		},
+		{
+			"weight": 30,
+			"element": {
+				"location": "xeno_artifacts:corridor_staircase",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		}
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"has_mimic=false": {
+			"model": "xeno_artifacts:block/xeno_artifact"
+		},
+		"has_mimic=true": {
+			"model": "xeno_artifacts:block/xeno_artifact_activated"
+		}
+	}
+}

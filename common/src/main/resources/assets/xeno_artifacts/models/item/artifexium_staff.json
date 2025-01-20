@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "xeno_artifacts:item/artifexium_staff"
+	}
+}

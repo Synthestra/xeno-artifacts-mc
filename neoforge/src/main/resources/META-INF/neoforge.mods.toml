@@ -4,28 +4,28 @@ loaderVersion = "[4,)"
 license = "Insert License Here"
 
 [[mods]]
-modId = "synth_testing"
+modId = "xeno_artifacts"
 version = "${version}"
-displayName = "Synth Testing"
+displayName = "xeno_artifacts"
 authors = "Me!"
 description = '''
 This is an example description! Tell everyone what your mod is about!
 '''
 #logoFile = ""
 
-[[dependencies.synth_testing]]
+[[dependencies.xeno_artifacts]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.0,)"
+versionRange = "[21.4,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.synth_testing]]
+[[dependencies.xeno_artifacts]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.1,)"
+versionRange = "[1.21.4,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[mixins]]
-config = "synth_testing.mixins.json"
+config = "xeno_artifacts.mixins.json"

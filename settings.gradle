@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'synth_testing'
+rootProject.name = 'xeno_artifacts'
 
 include 'common'
 include 'fabric'

@@ -1,0 +1,29 @@
+{
+	"item_group.xeno_artifacts.tab": "Xeno Artifacts",
+	
+	"block.xeno_artifacts.xeno_artifact": "Xeno Artifact",
+	
+	"item.xeno_artifacts.xeno_node_bias_up": "Xeno Bias (Up)",
+	"item.xeno_artifacts.xeno_node_bias_down": "Xeno Bias (Down)",
+	"item.xeno_artifacts.artifexium_staff": "Artifexium Staff",
+	"item.xeno_artifacts.node_scanner": "Node Scanner",
+	"item.xeno_artifacts.node_scanner_print_out": "Node Scanner Note",
+	"item.xeno_artifacts.xeno_artifact_notebook": "Xeno Artifact Notebook",
+	
+	"note.xeno_artifacts.node_id": "Node ID: %s",
+	"note.xeno_artifacts.bias_direction": "Bias Direction: %s",
+	"note.xeno_artifacts.edges": "Edges: %s",
+	"note.xeno_artifacts.depth": "Depth: %s",
+	"note.xeno_artifacts.trigger": "Stimulus: %s",
+	"note.xeno_artifacts.reaction": "Reaction: %s",
+	
+	"trigger.xeno_artifacts.entity_die": "Life Essence",
+	"trigger.xeno_artifacts.electricity": "Electricity",
+	"trigger.xeno_artifacts.beneficial_potion": "Applied Effect",
+	"trigger.xeno_artifacts.harmful_potion": "Applied Effect",
+	
+	"reaction.xeno_artifacts.spawn_item": "Matter Creation",
+	"reaction.xeno_artifacts.spawn_entity": "Matter Creation",
+	"reaction.xeno_artifacts.harden_to_deepslate": "Material Hardening",
+	"reaction.xeno_artifacts.random_teleport": "Metaphysical Displacement"
+}

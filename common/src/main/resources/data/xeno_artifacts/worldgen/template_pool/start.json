@@ -1,0 +1,15 @@
+{
+	"name": "xeno_artifacts:start",
+	"fallback": "minecraft:empty",
+	"elements": [
+		{
+			"weight": 100,
+			"element": {
+				"location": "xeno_artifacts:cube",
+				"processors": "minecraft:empty",
+				"projection": "rigid",
+				"element_type": "minecraft:single_pool_element"
+			}
+		}
+	]
+}
